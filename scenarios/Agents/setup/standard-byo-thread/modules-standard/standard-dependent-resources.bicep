@@ -66,6 +66,7 @@ resource cosmosDB 'Microsoft.DocumentDB/databaseAccounts@2024-11-15' = if(!cosmo
     consistencyPolicy: {
       defaultConsistencyLevel: 'Session'
     }
+    disableLocalAuth: true
     enableAutomaticFailover: false
     enableMultipleWriteLocations: false
     enableFreeTier: false

@@ -41,7 +41,7 @@ resource cosmosDBAccount 'Microsoft.CognitiveServices/accounts@2024-10-01' exist
 }
 
 #disable-next-line BCP081
-resource aiProject 'Microsoft.MachineLearningServices/workspaces@2025-01-01-preview' = {
+resource aiProject 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' = {
   name: aiProjectName
   location: location
   tags: union(tags, {
@@ -77,7 +77,7 @@ resource project_connection_cosmosdb 'Microsoft.MachineLearningServices/workspac
   }
 }
 
-output cosmosConnectionName string = cosmosConnectionName
+output cosmosConnectionName string = project_connection_cosmosdb.name
 output aiProjectName string = aiProject.name
 output aiProjectResourceId string = aiProject.id
 output aiProjectPrincipalId string = aiProject.identity.principalId

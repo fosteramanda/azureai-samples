@@ -209,6 +209,7 @@ module addCapabilityHost 'modules-standard/add-capability-host.bicep' = {
     aiProjectName: aiProject.outputs.aiProjectName
     acsConnectionName: aiHub.outputs.acsConnectionName
     aoaiConnectionName: aiHub.outputs.aoaiConnectionName
+    cosmosConnectionName: aiProject.outputs.cosmosConnectionName
   }
   dependsOn: [
     aiSearchRoleAssignments,aiServiceRoleAssignments, cosmosAccountRoleAssignments

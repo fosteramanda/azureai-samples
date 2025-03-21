@@ -22,12 +22,12 @@ var aiServiceConnections = ['${aoaiConnectionName}']
 var cosmosDBConnections = ['${cosmosConnectionName}']
 
 #disable-next-line BCP081
-resource aiHub 'Microsoft.MachineLearningServices/workspaces@2025-01-01-preview' existing = {
+resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' existing = {
   name: aiHubName
 }
 
 #disable-next-line BCP081
-resource aiProject 'Microsoft.MachineLearningServices/workspaces@2025-01-01-preview' existing = {
+resource aiProject 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' existing = {
   name: aiProjectName
 }
 
