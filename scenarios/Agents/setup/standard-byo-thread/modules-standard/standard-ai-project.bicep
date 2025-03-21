@@ -27,15 +27,6 @@ param cosmosDBSubscriptionId string
 @description('Resource Group name of the Cosmos DB resource')
 param cosmosDBResourceGroupName string
 
-/* @description('Name for capabilityHost.')
-param capabilityHostName string
-
-@description('Name for ACS connection.')
-param acsConnectionName string
-
-@description('Name for ACS connection.')
-param aoaiConnectionName string */
-
 //for constructing endpoint
 var subscriptionId = subscription().subscriptionId
 var resourceGroupName = resourceGroup().name
@@ -49,13 +40,8 @@ resource cosmosDBAccount 'Microsoft.CognitiveServices/accounts@2024-10-01' exist
   scope: resourceGroup(cosmosDBSubscriptionId,cosmosDBResourceGroupName)
 }
 
-
-/* var storageConnections = ['${aiProjectName}/workspaceblobstore']
-var aiSearchConnection = ['${acsConnectionName}']
-var aiServiceConnections = ['${aoaiConnectionName}'] */
-
-
-resource aiProject 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' = {
+#disable-next-line BCP081
+resource aiProject 'Microsoft.MachineLearningServices/workspaces@2025-01-01-preview' = {
   name: aiProjectName
   location: location
   tags: union(tags, {
@@ -91,6 +77,7 @@ resource project_connection_cosmosdb 'Microsoft.MachineLearningServices/workspac
   }
 }
 
+output cosmosConnectionName string = cosmosConnectionName
 output aiProjectName string = aiProject.name
 output aiProjectResourceId string = aiProject.id
 output aiProjectPrincipalId string = aiProject.identity.principalId

@@ -72,7 +72,8 @@ resource searchService 'Microsoft.Search/searchServices@2024-06-01-preview' exis
   scope: resourceGroup(aiSearchServiceSubscriptionId, aiSearchServiceResourceGroupName)
 }
 
-resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' = {
+#disable-next-line BCP081
+resource aiHub 'Microsoft.MachineLearningServices/workspaces@2025-01-01-preview' = {
   name: aiHubName
   location: location
   tags: tags
@@ -91,7 +92,7 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview'
   }
   kind: 'hub'
 
-  resource aiServicesConnection 'connections@2024-07-01-preview' = {
+  resource aiServicesConnection 'connections@2024-10-01-preview' = {
     name: aiServiceConnectionName
     properties: {
       category: aiServiceKind // either AIServices or AzureOpenAI
@@ -105,7 +106,7 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview'
       }
     }
   }
-  resource hub_connection_azureai_search 'connections@2024-07-01-preview' = {
+  resource hub_connection_azureai_search 'connections@2024-10-01-preview' = {
     name: acsConnectionName
     properties: {
       category: 'CognitiveSearch'
@@ -120,15 +121,6 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview'
       }
     }
   }
-
-  // Resource definition for the capability host
-  #disable-next-line BCP081
- /*  resource capabilityHost 'capabilityHosts@2024-10-01-preview' = {
-    name: '${aiHubName}-${capabilityHostName}'
-    properties: {
-      capabilityHostKind: 'Agents'
-    }
-  } */
   
 }
 
