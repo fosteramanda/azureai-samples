@@ -9,8 +9,10 @@ param aiProjectPrincipalId string
 @description('Resource ID of the AI project')
 param aiProjectId string
 
+param projectWorkspaceId string
 
-resource cosmosDBAccount 'Microsoft.DocumentDB/databaseAccounts@2024-11-15' existing = {
+#disable-next-line BCP081
+resource cosmosDBAccount 'Microsoft.DocumentDB/databaseAccounts@2025-01-01-preview' existing = {
   name: cosmosDBName
   scope: resourceGroup()
 }
@@ -22,7 +24,7 @@ resource cosmosDBOperatorRole 'Microsoft.Authorization/roleDefinitions@2022-04-0
 
 resource cosmosDBOperatorRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: cosmosDBAccount
-  name: guid(aiProjectId, cosmosDBOperatorRole.id, cosmosDBAccount.id)
+  name: guid(projectWorkspaceId, cosmosDBOperatorRole.id, cosmosDBAccount.id)
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: cosmosDBOperatorRole.id

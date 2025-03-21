@@ -10,7 +10,8 @@ param aiProjectPrincipalId string
 param aiProjectId string
 
 
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2024-12-01-preview' existing = {
+#disable-next-line BCP081
+resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2025-01-01-preview' existing = {
   name: cosmosAccountName
   scope: resourceGroup()
 }
@@ -21,13 +22,16 @@ resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-08-15
   name: 'enterprise_memory'
 }
 
-resource conatinerUserMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-08-15' existing = {
+#disable-next-line BCP081
+resource conatinerUserMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${aiProjectPrincipalId}-thread_messaage_store'
+  name: '${aiProjectPrincipalId}-thread-messaage-store'
 }
-resource containerSystemMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2022-08-15' existing = {
+
+#disable-next-line BCP081
+resource containerSystemMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${aiProjectPrincipalId}-system_thread_messaage_store'
+  name: '${aiProjectPrincipalId}-system-thread-messaage-store'
 }
 
 
