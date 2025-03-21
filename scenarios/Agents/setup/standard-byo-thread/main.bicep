@@ -226,6 +226,8 @@ module cosmosContainerRoleAssignments 'modules-standard/cosmos-container-role-as
     cosmosAccountName: aiDependencies.outputs.cosmosDBName
     aiProjectPrincipalId: aiProject.outputs.aiProjectPrincipalId
     aiProjectId: aiProject.outputs.aiProjectResourceId
+    projectWorkspaceId: aiProject.outputs.aiProjectWorkspaceId
+
 }
 dependsOn: [
   addCapabilityHost

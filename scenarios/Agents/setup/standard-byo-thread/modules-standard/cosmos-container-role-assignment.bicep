@@ -9,6 +9,8 @@ param aiProjectPrincipalId string
 @description('Resource ID of the AI project')
 param aiProjectId string
 
+param projectWorkspaceId string
+
 
 #disable-next-line BCP081
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2025-01-01-preview' existing = {
@@ -19,19 +21,19 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2025-01-01-preview
 // Reference existing database
 resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-08-15' existing = {
   parent: cosmosAccount
-  name: 'enterprise_memory'
+  name: 'enterprise-memory'
 }
 
 #disable-next-line BCP081
 resource conatinerUserMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${aiProjectPrincipalId}-thread-messaage-store'
+  name: '${projectWorkspaceId}-thread-messaage-store'
 }
 
 #disable-next-line BCP081
 resource containerSystemMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${aiProjectPrincipalId}-system-thread-messaage-store'
+  name: '${projectWorkspaceId}-system-thread-messaage-store'
 }
 
 
