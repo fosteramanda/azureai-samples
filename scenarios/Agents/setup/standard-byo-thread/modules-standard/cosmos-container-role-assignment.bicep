@@ -49,7 +49,7 @@ resource containerRoleAssignmentUserContainer 'Microsoft.DocumentDB/databaseAcco
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: conatinerUserMessageStore.id
+    scope: '"/dbs/enterprise-memory/colls/thread-message-store"'
   }
 }
 
@@ -59,6 +59,6 @@ resource containerRoleAssignmentSystemContainer 'Microsoft.DocumentDB/databaseAc
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: containerSystemMessageStore.id
+    scope: '/dbs/enterprise-memory/colls/system-thread-message-store'
   }
 }
