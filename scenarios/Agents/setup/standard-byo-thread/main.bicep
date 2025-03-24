@@ -55,7 +55,7 @@ param modelSkuName string = 'GlobalStandard'
 param modelCapacity int = 50
 
 @description('Model deployment location. If you want to deploy an Azure AI resource/model in different location than the rest of the resources created.')
-param modelLocation string = 'eastus'
+param modelLocation string = 'westus'
 
 @description('AI Service Account kind: either AzureOpenAI or AIServices')
 param aiServiceKind string = 'AIServices'
@@ -133,7 +133,7 @@ module aiHub 'modules-standard/standard-ai-hub.bicep' = {
     aiHubName: '${name}-${uniqueSuffix}'
     aiHubFriendlyName: aiHubFriendlyName
     aiHubDescription: aiHubDescription
-    location: location
+    // location: location
     tags: tags
 
     aiSearchName: aiDependencies.outputs.aiSearchName

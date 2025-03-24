@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.33.93.31351",
-      "templateHash": "17141793536497567906"
+      "version": "0.34.1.11899",
+      "templateHash": "1556685365265784510"
     }
   },
   "parameters": {
@@ -132,7 +132,7 @@
     },
     "modelLocation": {
       "type": "string",
-      "defaultValue": "eastus",
+      "defaultValue": "westus",
       "metadata": {
         "description": "Model deployment location. If you want to deploy an Azure AI resource/model in different location than the rest of the resources created."
       }
@@ -267,8 +267,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "11850133734385333247"
+              "version": "0.34.1.11899",
+              "templateHash": "6663389101524039253"
             }
           },
           "parameters": {
@@ -625,9 +625,6 @@
           "aiHubDescription": {
             "value": "[parameters('aiHubDescription')]"
           },
-          "location": {
-            "value": "[parameters('location')]"
-          },
           "tags": {
             "value": "[parameters('tags')]"
           },
@@ -674,17 +671,11 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "496157612467187650"
+              "version": "0.34.1.11899",
+              "templateHash": "6256423421614753401"
             }
           },
           "parameters": {
-            "location": {
-              "type": "string",
-              "metadata": {
-                "description": "Azure region of the deployment"
-              }
-            },
             "tags": {
               "type": "object",
               "metadata": {
@@ -915,8 +906,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "8224646159595333026"
+              "version": "0.34.1.11899",
+              "templateHash": "10939784345184496367"
             }
           },
           "parameters": {
@@ -1079,8 +1070,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "8273307596853107787"
+              "version": "0.34.1.11899",
+              "templateHash": "17982457220328884452"
             }
           },
           "parameters": {
@@ -1173,8 +1164,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "13082605048606812458"
+              "version": "0.34.1.11899",
+              "templateHash": "17298343228794354454"
             }
           },
           "parameters": {
@@ -1256,8 +1247,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "17725763585430388696"
+              "version": "0.34.1.11899",
+              "templateHash": "10541961007011771318"
             }
           },
           "parameters": {
@@ -1332,8 +1323,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "12191138155587807529"
+              "version": "0.34.1.11899",
+              "templateHash": "13609272484309882148"
             }
           },
           "parameters": {
@@ -1454,8 +1445,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.33.93.31351",
-              "templateHash": "8568440580959016527"
+              "version": "0.34.1.11899",
+              "templateHash": "9042109424353218840"
             }
           },
           "parameters": {

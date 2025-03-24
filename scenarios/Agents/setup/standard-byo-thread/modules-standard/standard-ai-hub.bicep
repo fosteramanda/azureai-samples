@@ -1,7 +1,7 @@
 // Creates an Azure AI resource with proxied endpoints for the Azure AI services provider
 
-@description('Azure region of the deployment')
-param location string
+// @description('Azure region of the deployment')
+// param location string = 'eastus2euap'
 
 @description('Tags to add to the resources')
 param tags object
