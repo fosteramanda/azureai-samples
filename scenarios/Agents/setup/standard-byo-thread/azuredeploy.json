@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.1.11899",
-      "templateHash": "1556685365265784510"
+      "templateHash": "3044256999900620141"
     }
   },
   "parameters": {
@@ -15,7 +15,7 @@
       "minLength": 2,
       "maxLength": 12,
       "metadata": {
-        "description": "Name for the AI resource and used to derive name of dependent resources."
+        "description": "Name for your Azure AI Hub resource."
       }
     },
     "aiHubFriendlyName": {
@@ -27,9 +27,9 @@
     },
     "aiHubDescription": {
       "type": "string",
-      "defaultValue": "This is an example AI resource for use in Azure AI Studio.",
+      "defaultValue": "This is an example AI Hub resource for use in Azure AI Studio.",
       "metadata": {
-        "description": "Description of your Azure AI resource displayed in AI studio"
+        "description": "Creating an Azure AI Hub to set up your app environment and Azure resources."
       }
     },
     "aiProjectName": {
@@ -50,7 +50,7 @@
       "type": "string",
       "defaultValue": "This is an example AI Project resource for use in Azure AI Studio.",
       "metadata": {
-        "description": "Description of your Azure AI resource displayed in AI studio"
+        "description": "Creating an Azure AI project under your Hub creates an endpoint for your app to call, and sets up app services to access to resources in your tenant."
       }
     },
     "location": {
@@ -97,7 +97,7 @@
     },
     "modelName": {
       "type": "string",
-      "defaultValue": "gpt-4o-mini",
+      "defaultValue": "gpt-4o",
       "metadata": {
         "description": "Model name for deployment"
       }
@@ -111,7 +111,7 @@
     },
     "modelVersion": {
       "type": "string",
-      "defaultValue": "2024-07-18",
+      "defaultValue": "2024-08-06",
       "metadata": {
         "description": "Model version for deployment"
       }
@@ -1446,7 +1446,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.1.11899",
-              "templateHash": "9042109424353218840"
+              "templateHash": "7715362003694478020"
             }
           },
           "parameters": {
@@ -1473,27 +1473,31 @@
             }
           },
           "variables": {
-            "roleDefinitionId": "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions', parameters('cosmosAccountName'), '00000000-0000-0000-0000-000000000002')]"
+            "userThreadName": "[format('{0}-thread-message-store', parameters('projectWorkspaceId'))]",
+            "systemThreadName": "[format('{0}-system-thread-message-store', parameters('projectWorkspaceId'))]",
+            "roleDefinitionId": "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions', parameters('cosmosAccountName'), '00000000-0000-0000-0000-000000000002')]",
+            "scopeSystemContainer": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.DocumentDB/databaseAccounts/{2}/dbs/enterprise_memory/colls/{3}', subscription().subscriptionId, resourceGroup().name, parameters('cosmosAccountName'), variables('systemThreadName'))]",
+            "scopeUserContainer": "[format('/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.DocumentDB/databaseAccounts/{2}/dbs/enterprise_memory/colls/{3}', subscription().subscriptionId, resourceGroup().name, parameters('cosmosAccountName'), variables('userThreadName'))]"
           },
           "resources": [
             {
               "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments",
               "apiVersion": "2022-05-15",
-              "name": "[format('{0}/{1}', parameters('cosmosAccountName'), guid(parameters('aiProjectId'), resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmosAccountName'), 'enterprise-memory', format('{0}-thread-messaage-store', parameters('projectWorkspaceId'))), variables('roleDefinitionId')))]",
+              "name": "[format('{0}/{1}', parameters('cosmosAccountName'), guid(parameters('aiProjectId'), resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmosAccountName'), 'enterprise_memory', variables('userThreadName')), variables('roleDefinitionId')))]",
               "properties": {
                 "principalId": "[parameters('aiProjectPrincipalId')]",
                 "roleDefinitionId": "[variables('roleDefinitionId')]",
-                "scope": "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmosAccountName'), 'enterprise-memory', format('{0}-thread-messaage-store', parameters('projectWorkspaceId')))]"
+                "scope": "[variables('scopeUserContainer')]"
               }
             },
             {
               "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments",
               "apiVersion": "2022-05-15",
-              "name": "[format('{0}/{1}', parameters('cosmosAccountName'), guid(parameters('aiProjectId'), resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmosAccountName'), 'enterprise-memory', format('{0}-system-thread-messaage-store', parameters('projectWorkspaceId'))), variables('roleDefinitionId')))]",
+              "name": "[format('{0}/{1}', parameters('cosmosAccountName'), guid(parameters('aiProjectId'), resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmosAccountName'), 'enterprise_memory', variables('systemThreadName')), variables('roleDefinitionId')))]",
               "properties": {
                 "principalId": "[parameters('aiProjectPrincipalId')]",
                 "roleDefinitionId": "[variables('roleDefinitionId')]",
-                "scope": "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmosAccountName'), 'enterprise-memory', format('{0}-system-thread-messaage-store', parameters('projectWorkspaceId')))]"
+                "scope": "[variables('scopeSystemContainer')]"
               }
             }
           ]

@@ -3,14 +3,14 @@
 // Parameters
 @minLength(2)
 @maxLength(12)
-@description('Name for the AI resource and used to derive name of dependent resources.')
+@description('Name for your Azure AI Hub resource.')
 param aiHubName string = 'hub-demo'
 
 @description('Friendly name for your Hub resource')
 param aiHubFriendlyName string = 'Agents Hub resource'
 
-@description('Description of your Azure AI resource displayed in AI studio')
-param aiHubDescription string = 'This is an example AI resource for use in Azure AI Studio.'
+@description('Creating an Azure AI Hub to set up your app environment and Azure resources.')
+param aiHubDescription string = 'This is an example AI Hub resource for use in Azure AI Studio.'
 
 @description('Name for the AI project resources.')
 param aiProjectName string = 'project-demo'
@@ -18,7 +18,7 @@ param aiProjectName string = 'project-demo'
 @description('Friendly name for your Azure AI resource')
 param aiProjectFriendlyName string = 'Agents Project resource'
 
-@description('Description of your Azure AI resource displayed in AI studio')
+@description('Creating an Azure AI project under your Hub creates an endpoint for your app to call, and sets up app services to access to resources in your tenant.')
 param aiProjectDescription string = 'This is an example AI Project resource for use in Azure AI Studio.'
 
 @description('Azure region used for the deployment of all resources.')
@@ -40,13 +40,13 @@ param storageName string = 'agent-storage'
 param aiServicesName string = 'agent-ai-services'
 
 @description('Model name for deployment')
-param modelName string = 'gpt-4o-mini'
+param modelName string = 'gpt-4o'
 
 @description('Model format for deployment')
 param modelFormat string = 'OpenAI'
 
 @description('Model version for deployment')
-param modelVersion string = '2024-07-18'
+param modelVersion string = '2024-08-06'
 
 @description('Model deployment SKU name')
 param modelSkuName string = 'GlobalStandard'

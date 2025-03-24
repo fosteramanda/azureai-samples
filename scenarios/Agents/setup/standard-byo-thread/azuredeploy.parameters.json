@@ -33,13 +33,13 @@
         "value": "agent-ai-services"
       },
       "modelName": {
-        "value": "gpt-4o-mini"
+        "value": "gpt-4o"
       },
       "modelFormat": {
         "value": "OpenAI"
       },
       "modelVersion": {
-        "value": "2024-07-18"
+        "value": "2024-08-06"
       },
       "modelSkuName": {
         "value": "GlobalStandard"
@@ -57,6 +57,9 @@
         "value": ""
       },
       "aiStorageAccountResourceId":{
+        "value": ""
+      },
+      "cosmosDBResourceId":{
         "value": ""
       },
       "aiServiceKind": {
