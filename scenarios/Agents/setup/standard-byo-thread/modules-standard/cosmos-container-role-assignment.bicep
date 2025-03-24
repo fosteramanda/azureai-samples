@@ -11,6 +11,9 @@ param aiProjectId string
 
 param projectWorkspaceId string
 
+var userThreadName = '${projectWorkspaceId}-thread-messaage-store'
+var systemThreadName = '${projectWorkspaceId}-system-thread-messaage-store'
+
 
 #disable-next-line BCP081
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2025-01-01-preview' existing = {
@@ -19,9 +22,10 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2025-01-01-preview
 }
 
 // Reference existing database
-resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2022-08-15' existing = {
+#disable-next-line BCP081
+resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-01-01-preview' existing = {
   parent: cosmosAccount
-  name: 'enterprise-memory'
+  name: 'enterprise_memory'
 }
 
 #disable-next-line BCP081
@@ -43,13 +47,16 @@ var roleDefinitionId = resourceId(
   '00000000-0000-0000-0000-000000000002'
 )
 
+var scopeSystemContainer = '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosAccountName}/dbs/${database.name}/colls/${systemThreadName}'
+var scopeUserContainer = '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosAccountName}/dbs/${database.name}/colls/${userThreadName}'
+
 resource containerRoleAssignmentUserContainer 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-05-15' = {
   parent: cosmosAccount
   name: guid(aiProjectId, conatinerUserMessageStore.id, roleDefinitionId)
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: '/dbs/enterprise-memory/colls/thread-message-store'
+    scope: scopeUserContainer
   }
 }
 
@@ -59,6 +66,6 @@ resource containerRoleAssignmentSystemContainer 'Microsoft.DocumentDB/databaseAc
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: '/dbs/enterprise-memory/colls/system-thread-message-store'
+    scope: scopeSystemContainer
   }
 }
