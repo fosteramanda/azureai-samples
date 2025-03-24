@@ -47,8 +47,8 @@ var roleDefinitionId = resourceId(
   '00000000-0000-0000-0000-000000000002'
 )
 
-// var scopeSystemContainer = '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosAccountName}/dbs/${database.name}/colls/${systemThreadName}'
-// var scopeUserContainer = '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosAccountName}/dbs/${database.name}/colls/${userThreadName}'
+var scopeSystemContainer = '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosAccountName}/dbs/enterprise_memory/colls/${systemThreadName}'
+var scopeUserContainer = '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosAccountName}/dbs/enterprise_memory/colls/${userThreadName}'
 
 resource containerRoleAssignmentUserContainer 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-05-15' = {
   parent: cosmosAccount
@@ -56,7 +56,7 @@ resource containerRoleAssignmentUserContainer 'Microsoft.DocumentDB/databaseAcco
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: containerUserMessageStore.id
+    scope: scopeUserContainer
   }
 }
 
@@ -66,6 +66,6 @@ resource containerRoleAssignmentSystemContainer 'Microsoft.DocumentDB/databaseAc
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: containerSystemMessageStore.id
+    scope: scopeSystemContainer
   }
 }
