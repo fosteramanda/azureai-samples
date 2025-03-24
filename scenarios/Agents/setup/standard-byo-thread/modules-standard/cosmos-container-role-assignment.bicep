@@ -11,8 +11,8 @@ param aiProjectId string
 
 param projectWorkspaceId string
 
-var userThreadName = '${projectWorkspaceId}-thread-messaage-store'
-var systemThreadName = '${projectWorkspaceId}-system-thread-messaage-store'
+var userThreadName = '${projectWorkspaceId}-thread-message-store'
+var systemThreadName = '${projectWorkspaceId}-system-thread-message-store'
 
 
 #disable-next-line BCP081
@@ -29,15 +29,15 @@ resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-01-01
 }
 
 #disable-next-line BCP081
-resource conatinerUserMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
+resource containerUserMessageStore  'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${projectWorkspaceId}-thread-message-store'
+  name: userThreadName
 }
 
 #disable-next-line BCP081
 resource containerSystemMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${projectWorkspaceId}-system-thread-message-store'
+  name: systemThreadName
 }
 
 
@@ -52,11 +52,11 @@ var scopeUserContainer = '/subscriptions/${subscription().subscriptionId}/resour
 
 resource containerRoleAssignmentUserContainer 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2022-05-15' = {
   parent: cosmosAccount
-  name: guid(aiProjectId, conatinerUserMessageStore.id, roleDefinitionId)
+  name: guid(aiProjectId, containerUserMessageStore.id, roleDefinitionId)
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: scopeUserContainer
+    scope: containerUserMessageStore.id
   }
 }
 
@@ -66,6 +66,6 @@ resource containerRoleAssignmentSystemContainer 'Microsoft.DocumentDB/databaseAc
   properties: {
     principalId: aiProjectPrincipalId
     roleDefinitionId: roleDefinitionId
-    scope: scopeSystemContainer
+    scope: containerSystemMessageStore.id
   }
 }
