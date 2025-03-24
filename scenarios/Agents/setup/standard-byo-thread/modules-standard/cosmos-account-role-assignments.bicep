@@ -6,9 +6,6 @@ param cosmosDBName string
 @description('Principal ID of the AI project')
 param aiProjectPrincipalId string
 
-@description('Resource ID of the AI project')
-param aiProjectId string
-
 param projectWorkspaceId string
 
 #disable-next-line BCP081

@@ -35,7 +35,7 @@ var projectConnectionString = '${location}.api.azureml.ms;${subscriptionId};${re
 
 var cosmosConnectionName = '${aiProjectName}-connection-CosmosDBAccount'
 
-resource cosmosDBAccount 'Microsoft.CognitiveServices/accounts@2024-10-01' existing = {
+resource cosmosDBAccount 'Microsoft.DocumentDB/databaseAccounts@2024-12-01-preview' existing = {
   name: cosmosDBName
   scope: resourceGroup(cosmosDBSubscriptionId,cosmosDBResourceGroupName)
 }
@@ -43,7 +43,7 @@ resource cosmosDBAccount 'Microsoft.CognitiveServices/accounts@2024-10-01' exist
 #disable-next-line BCP081
 resource aiProject 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' = {
   name: aiProjectName
-  location: location
+  location: 'eastus2euap'
   tags: union(tags, {
     ProjectConnectionString: projectConnectionString
   })
@@ -62,7 +62,8 @@ resource aiProject 'Microsoft.MachineLearningServices/workspaces@2024-10-01-prev
   kind: 'project'
 }
 
-resource project_connection_cosmosdb 'Microsoft.MachineLearningServices/workspaces/connections@2024-10-01-preview' = {
+#disable-next-line BCP081
+resource project_connection_cosmosdb 'Microsoft.MachineLearningServices/workspaces/connections@2025-01-01-preview' = {
   name: cosmosConnectionName
   parent: aiProject
   properties: {

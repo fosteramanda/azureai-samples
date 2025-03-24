@@ -48,9 +48,6 @@ param aiSearchServiceResourceGroupName string
 @description('Subscription ID of the AI Search resource')
 param aiSearchServiceSubscriptionId string
 
-/* @description('Name for capabilityHost.')
-param capabilityHostName string  */
-
 @description('AI Service Account kind: either OpenAI or AIServices')
 param aiServiceKind string 
 
@@ -74,7 +71,7 @@ resource searchService 'Microsoft.Search/searchServices@2024-06-01-preview' exis
 
 resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' = {
   name: aiHubName
-  location: location
+  location: 'eastus2euap'
   tags: tags
   identity: {
     type: 'SystemAssigned'
@@ -105,6 +102,7 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview'
       }
     }
   }
+  
   resource hub_connection_azureai_search 'connections@2024-10-01-preview' = {
     name: acsConnectionName
     properties: {

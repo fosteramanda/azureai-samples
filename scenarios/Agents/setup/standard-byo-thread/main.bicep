@@ -197,7 +197,6 @@ module cosmosAccountRoleAssignments 'modules-standard/cosmos-account-role-assign
   params: {
     cosmosDBName: aiDependencies.outputs.cosmosDBName
     aiProjectPrincipalId: aiProject.outputs.aiProjectPrincipalId
-    aiProjectId: aiProject.outputs.aiProjectResourceId
     projectWorkspaceId: aiProject.outputs.aiProjectWorkspaceId
 
   }

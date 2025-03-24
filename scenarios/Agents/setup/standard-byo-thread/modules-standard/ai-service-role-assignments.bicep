@@ -17,7 +17,6 @@ resource aiServices 'Microsoft.CognitiveServices/accounts@2024-06-01-preview' ex
 resource cognitiveServicesContributorRole 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   name: '25fbc0a9-bd7c-42a3-aa1a-3b75d497ee68'
   scope: resourceGroup()
-
 }
 
 resource cognitiveServicesContributorAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01'= {
