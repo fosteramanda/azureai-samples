@@ -31,13 +31,13 @@ resource database 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-01-01
 #disable-next-line BCP081
 resource conatinerUserMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${projectWorkspaceId}-thread-messaage-store'
+  name: '${projectWorkspaceId}-thread-message-store'
 }
 
 #disable-next-line BCP081
 resource containerSystemMessageStore 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-01-01-preview' existing = {
   parent: database
-  name: '${projectWorkspaceId}-system-thread-messaage-store'
+  name: '${projectWorkspaceId}-system-thread-message-store'
 }
 
 
