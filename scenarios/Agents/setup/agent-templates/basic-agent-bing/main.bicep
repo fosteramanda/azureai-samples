@@ -28,13 +28,13 @@ param location string = resourceGroup().location
 param tags object = {}
 
 @description('Model name for deployment')
-param modelName string = 'gpt-4o-mini'
+param modelName string = 'gpt-4o'
 
 @description('Model format for deployment')
 param modelFormat string = 'OpenAI'
 
 @description('Model version for deployment')
-param modelVersion string = '2024-07-18'
+param modelVersion string = '2024-08-06'
 
 @description('Model deployment SKU name')
 param modelSkuName string = 'GlobalStandard'

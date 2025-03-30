@@ -79,7 +79,7 @@ resource modelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-
   }
 }
 
-resource bingSearch 'Microsoft.Bing/accounts@2020-06-10' =  {
+resource bingSearch 'Microsoft.Bing/accounts@2020-06-10' = {
   name: bingSearchName
   location: 'global'
   sku: {

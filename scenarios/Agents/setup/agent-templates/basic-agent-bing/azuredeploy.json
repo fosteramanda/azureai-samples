@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.1.11899",
-      "templateHash": "3067107152679868345"
+      "templateHash": "12991333669146017812"
     }
   },
   "parameters": {
@@ -69,7 +69,7 @@
     },
     "modelName": {
       "type": "string",
-      "defaultValue": "gpt-4o-mini",
+      "defaultValue": "gpt-4o",
       "metadata": {
         "description": "Model name for deployment"
       }
@@ -83,7 +83,7 @@
     },
     "modelVersion": {
       "type": "string",
-      "defaultValue": "2024-07-18",
+      "defaultValue": "2024-08-06",
       "metadata": {
         "description": "Model version for deployment"
       }
@@ -494,7 +494,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.1.11899",
-              "templateHash": "16812740141234117474"
+              "templateHash": "555685630552470996"
             }
           },
           "parameters": {
@@ -617,12 +617,12 @@
                 "authType": "ApiKey",
                 "isSharedToAll": true,
                 "credentials": {
-                  "key": "[format('{0}', listKeys(resourceId('Microsoft.Bing/searchServices', parameters('bingSearchName')), '2020-06-10').key1)]"
+                  "key": "[format('{0}', listKeys(resourceId('Microsoft.Bing/accounts', parameters('bingSearchName')), '2020-06-10').key1)]"
                 },
                 "metadata": {
                   "ApiType": "Azure",
-                  "ResourceId": "[resourceId('Microsoft.Bing/searchServices', parameters('bingSearchName'))]",
-                  "location": "[reference(resourceId('Microsoft.Bing/searchServices', parameters('bingSearchName')), '2024-10-01', 'full').location]"
+                  "ResourceId": "[resourceId('Microsoft.Bing/accounts', parameters('bingSearchName'))]",
+                  "location": "[reference(resourceId('Microsoft.Bing/accounts', parameters('bingSearchName')), '2020-06-10', 'full').location]"
                 }
               },
               "dependsOn": [
