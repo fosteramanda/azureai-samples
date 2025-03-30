@@ -47,6 +47,7 @@ resource aiServices 'Microsoft.CognitiveServices/accounts@2023-05-01' existing =
   scope: resourceGroup(aiServiceAccountSubscriptionId, aiServiceAccountResourceGroupName)
 }
 
+#disable-next-line BCP081
 resource bingSearch 'Microsoft.Bing/accounts@2020-06-10' existing = {
   name: bingSearchName
   scope: resourceGroup()

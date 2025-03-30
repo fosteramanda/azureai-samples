@@ -79,6 +79,7 @@ resource modelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-
   }
 }
 
+#disable-next-line BCP081
 resource bingSearch 'Microsoft.Bing/accounts@2020-06-10' = {
   name: bingSearchName
   location: 'global'
