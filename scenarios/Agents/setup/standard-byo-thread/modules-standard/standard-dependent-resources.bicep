@@ -49,14 +49,21 @@ param aiSearchServiceResourceId string
 @description('The AI Storage Account full ARM Resource ID. This is an optional field, and if not provided, the resource will be created.')
 param aiStorageAccountResourceId string
 
+@description('The Cosmos DB Account full ARM Resource ID. This is an optional field, and if not provided, the resource will be created.')
 param cosmosDBResourceId string
 
-var aiServiceExists = aiServiceAccountResourceId != ''
-var acsExists = aiSearchServiceResourceId != ''
-var aiStorageExists = aiStorageAccountResourceId != ''
-var cosmosDBExists = cosmosDBResourceId != ''
+param aiServiceExists bool
+param aiSearchExists bool
+param aiStorageExists bool
+param cosmosDBExists bool
 
 
+var cosmosParts = split(cosmosDBResourceId, '/')
+
+resource existingCosmosDB 'Microsoft.DocumentDB/databaseAccounts@2024-11-15' existing = if (cosmosDBExists) {
+  name: cosmosParts[8]
+  scope: resourceGroup(cosmosParts[2], cosmosParts[4])
+}
 resource cosmosDB 'Microsoft.DocumentDB/databaseAccounts@2024-11-15' = if(!cosmosDBExists) {
   name: cosmosDBName
   location: location
@@ -151,11 +158,11 @@ resource modelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-
 
 var acsParts = split(aiSearchServiceResourceId, '/')
 
-resource existingSearchService 'Microsoft.Search/searchServices@2024-06-01-preview' existing = if (acsExists) {
+resource existingSearchService 'Microsoft.Search/searchServices@2024-06-01-preview' existing = if (aiSearchExists) {
   name: acsParts[8]
   scope: resourceGroup(acsParts[2], acsParts[4])
 }
-resource aiSearch 'Microsoft.Search/searchServices@2024-06-01-preview' = if(!acsExists) {
+resource aiSearch 'Microsoft.Search/searchServices@2024-06-01-preview' = if(!aiSearchExists) {
   name: aiSearchName
   location: location
   tags: tags
@@ -214,17 +221,19 @@ output aiservicesTarget string = aiServiceExists ? existingAIServiceAccount.prop
 output aiServiceAccountResourceGroupName string = aiServiceExists ? aiServiceParts[4] : resourceGroup().name
 output aiServiceAccountSubscriptionId string = aiServiceExists ? aiServiceParts[2] : subscription().subscriptionId
 
-output aiSearchName string = acsExists ? existingSearchService.name : aiSearch.name
-output aisearchID string = acsExists ? existingSearchService.id : aiSearch.id
-output aiSearchServiceResourceGroupName string = acsExists ? acsParts[4] : resourceGroup().name
-output aiSearchServiceSubscriptionId string = acsExists ? acsParts[2] : subscription().subscriptionId
+output aiSearchName string = aiSearchExists ? existingSearchService.name : aiSearch.name
+output aisearchID string = aiSearchExists ? existingSearchService.id : aiSearch.id
+output aiSearchServiceResourceGroupName string = aiSearchExists ? acsParts[4] : resourceGroup().name
+output aiSearchServiceSubscriptionId string = aiSearchExists ? acsParts[2] : subscription().subscriptionId
 
 output storageAccountName string = aiStorageExists ? existingAIStorageAccount.name :  storage.name
 output storageId string =  aiStorageExists ? existingAIStorageAccount.id :  storage.id
 output storageAccountResourceGroupName string = aiStorageExists ? aiStorageParts[4] : resourceGroup().name
 output storageAccountSubscriptionId string = aiStorageExists ? aiStorageParts[2] : subscription().subscriptionId
 
-output cosmosDBName string = cosmosDBExists ? cosmosDBName : cosmosDB.name
-output cosmosDBId string = cosmosDBExists ? cosmosDBResourceId : cosmosDB.id
+output cosmosDBName string = cosmosDBExists ? existingCosmosDB.name : cosmosDB.name
+output cosmosDBId string = cosmosDBExists ? existingCosmosDB.id : cosmosDB.id
+output cosmosDBResourceGroupName string = cosmosDBExists ? cosmosParts[4] : resourceGroup().name
+output cosmosDBSubscriptionId string = cosmosDBExists ? cosmosParts[2] : subscription().subscriptionId
 
 output keyvaultId string = keyVault.id

@@ -83,7 +83,18 @@ var projectName = toLower('${aiProjectName}')
 param deploymentTimestamp string = utcNow('yyyyMMddHHmmss')
 var uniqueSuffix = substring(uniqueString('${resourceGroup().id}-${deploymentTimestamp}'), 0, 4)
 
-var aiServiceExists = aiServiceAccountResourceId != ''
+module validateExistingResources 'modules-standard/validate-existing-resources.bicep' = {
+  name: 'validate-existing-resources-${name}-${uniqueSuffix}-deployment'
+  params: {
+    aiServiceAccountResourceId: aiServiceAccountResourceId
+    aiSearchServiceResourceId: aiSearchServiceResourceId
+    aiStorageAccountResourceId: aiStorageAccountResourceId
+    cosmosDBResourceId: cosmosDBResourceId
+  }
+}
+
+// Already validated existing resources. Either create new resources or use existing ones because the resource IDs have been validated
+var aiServiceExists = aiStorageAccountResourceId != ''
 var acsExists = aiSearchServiceResourceId != ''
 var cosmosExists = cosmosDBResourceId != ''
 
@@ -119,10 +130,21 @@ module aiDependencies 'modules-standard/standard-dependent-resources.bicep' = {
      modelCapacity: modelCapacity
      modelLocation: modelLocation
 
+     // AI Services account parameters
      aiServiceAccountResourceId: aiServiceAccountResourceId
+     aiServiceExists: validateExistingResources.outputs.aiServiceExists
+    
+     // AI Search Service parameters
      aiSearchServiceResourceId: aiSearchServiceResourceId
-     aiStorageAccountResourceId: aiStorageAccountResourceId
+     aiSearchExists: validateExistingResources.outputs.aiSearchExists
+
+    // Storage Account
+    aiStorageAccountResourceId: aiStorageAccountResourceId
+    aiStorageExists: validateExistingResources.outputs.aiStorageExists
+
+    // Cosmos DB Account
      cosmosDBResourceId: cosmosDBResourceId
+     cosmosDBExists: validateExistingResources.outputs.cosmosDBExists
     }
 }
 
@@ -166,8 +188,8 @@ module aiProject 'modules-standard/standard-ai-project.bicep' = {
     aiHubId: aiHub.outputs.aiHubID
 
     cosmosDBName: aiDependencies.outputs.cosmosDBName
-    cosmosDBSubscriptionId: cosmosDBSubscriptionId
-    cosmosDBResourceGroupName: cosmosDBResourceGroupName
+    cosmosDBSubscriptionId: aiDependencies.outputs.cosmosDBSubscriptionId
+    cosmosDBResourceGroupName: aiDependencies.outputs.cosmosDBResourceGroupName
   }
 }
 
