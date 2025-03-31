@@ -90,7 +90,6 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview'
     }
   }
 
-
   resource hub_connection_bing 'connections@2024-07-01-preview' = {
     name: bingConnectionName
     properties: {
