@@ -1,5 +1,5 @@
 ---
-description: This set of templates demonstrates how to set up Azure AI Agent Service with the standard setup, meaning with managed identity authentication for project/hub connections and public internet access enabled. Agents use customer-owned, single-tenant search and storage resources. With this setup, you have full control and visibility over these resources, but you will incur costs based on your usage.
+description: This set of templates demonstrates how to set up Azure AI Agent Service with the standard setup, meaning with managed identity authentication for project/hub connections and public internet access enabled. Agents use customer-owned, single-tenant search, file storage, and thread storage resources. With this setup, you have full control and visibility over these resources, but you will incur costs based on your usage.
 page_type: sample
 products:
 - azure
@@ -33,6 +33,7 @@ Optional use an existing AI Services/AOAI, AI Search, and/or Azure Blob Storage 
 - aiServiceAccountResourceId
 - aiSearchServiceResourceId
 - aiStorageAccountResourceId
+- cosmosDBResourceID
 
 If you want to use an existing Azure OpenAI resource, you will need to update the `aiServiceAccountResourceId` and the `aiServiceKind` parameter in the parameters file. The `aiServiceKind` parameter should be set to `AzureOpenAI`.
 
