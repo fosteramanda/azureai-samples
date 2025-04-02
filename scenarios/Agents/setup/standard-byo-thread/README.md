@@ -44,9 +44,10 @@ If you want to use an existing Azure OpenAI resource, you will need to update th
 | `Microsoft.Resources/resourceGroups` | The resource group all resources get deployed into |
 | `Microsoft.KeyVault/vaults` | An Azure Key Vault instance associated to the Azure Machine Learning workspace |
 | `Microsoft.Storage/storageAccounts` | An Azure Storage instance associated to the Azure Machine Learning workspace |
+| `Microsoft.DocumentDB/databaseAccounts@2024-11-15` | An Azure Cosmos DB for NoSQL account connected to the Azure Machine Learning workspace |
 | `Microsoft.MachineLearningServices/workspaces` | An Azure AI hub (Azure Machine Learning RP workspace of kind 'hub') |
 | `Microsoft.MachineLearningServices/workspaces` | An Azure AI project (Azure Machine Learning RP workspace of kind 'project') |
-| `Microsoft.CognitiveServices/accounts` | An Azure AI Services as the model-as-a-service endpoint provider (allowed kinds: 'AIServices' and 'OpenAI') |
+| `Microsoft.CognitiveServices/accounts` | An Azure AI Services as the model-as-a-service endpoint provider (allowed kinds: 'AIServices' and 'OpenAI') | 
 | `Microsoft.CognitiveServices/accounts/deployments` | A gpt-4o-mini model is deployed |
 | `Microsoft.Search/searchServices` | An Azure AI Search account  |
 `Tags: `
