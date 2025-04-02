@@ -26,14 +26,14 @@ languages:
 
 [![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazureai-samples%2Fmain%2Fscenarios%2FAgents%2Fsetup%2Fstandard-agent%2Fazuredeploy.json)
 
-Resources for the hub, project, storage account, key vault, AI Services, and Azure AI Search will be created for you. The AI Services, AI Search, and Azure Blob Storage account will be connected to your project/hub using managed identity for authentication and a gpt-4o-mini model will be deployed in the eastus region.
+Resources for the hub, project, storage account, key vault, AI Services, Azure AI Search, and Azure Cosmos DB for NoSQL account will be created for you. The AI Services, AI Search, Azure Blob Storage, and Cosmos DB Account will be connected to your project/hub using managed identity for authentication and a gpt-4o model will be deployed in the eastus region.
 
-Optional use an existing AI Services/AOAI, AI Search, and/or Azure Blob Storage resource by providing the full arm resource id in the parameters file:
+Optional use an existing AI Services/AOAI, AI Search, Azure Blob Storage, and/or Cosmos DB Account resource by providing the full arm resource id in the parameters file:
 
 - aiServiceAccountResourceId
 - aiSearchServiceResourceId
 - aiStorageAccountResourceId
-- cosmosDBResourceID
+- cosmosDBResourceId
 
 If you want to use an existing Azure OpenAI resource, you will need to update the `aiServiceAccountResourceId` and the `aiServiceKind` parameter in the parameters file. The `aiServiceKind` parameter should be set to `AzureOpenAI`.
 
