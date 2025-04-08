@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "account_name": {
+      "value": "aiServices"
+    },
+    "project_name": {
+      "value": "project"
+    },
+    "description": {
+      "value": ""
+    },
+    "display_name": {
+      "value": ""
+    },
+    "location": {
+      "value": ""
+    },
+    "modelName": {
+      "value": ""
+    },
+    "modelFormat": {
+      "value": ""
+    },
+    "modelVersion": {
+      "value": ""
+    },
+    "modelSkuName": {
+      "value": ""
+    },
+    "modelCapacity": {
+      "value": 0
+    }
+  }
+}
