@@ -6,7 +6,7 @@ This bicep template provisions required resources for a basic project setup. A n
 
 All agents created in this project will automatically use Microsoft managed, multitenant search and storage resources.
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazureai-samples%2Fmain%2Fscenarios%2FAgents%2Fsetup%2Fbasic-agent-identity%2Fazuredeploy.json)
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffosteramanda%2Fazureai-samples%2Frefs%2Fheads%2F1rp-setup%2Fscenarios%2FAgents%2Fsetup%2F1rp%2Fbasic-setup%2Fazuredeploy.json)
 
 To deploy this template run the following commands
 
